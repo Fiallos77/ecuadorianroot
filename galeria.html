@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galería – Ecuadorian Roots Dance Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --amarillo:#F2A800;
+  --rojo:#D63228;
+  --azul:#1A5CA8;
+  --verde:#217A3C;
+  --naranja:#E8650A;
+  --crema:#FFFBF2;
+  --blanco:#FFFFFF;
+  --gris-claro:#F5F5F0;
+  --texto:#1A1A1A;
+  --texto-suave:#555;
+}
+body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--texto);overflow-x:hidden}
+
+nav{
+  position:fixed;top:0;width:100%;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:64px;
+  background:rgba(255,251,242,0.95);backdrop-filter:blur(12px);
+  border-bottom:4px solid var(--amarillo);
+  box-shadow:0 2px 20px rgba(0,0,0,0.08);
+}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.1em;color:var(--rojo);text-decoration:none}
+.nav-back{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  color:var(--texto-suave);text-decoration:none;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-back:hover{color:var(--rojo)}
+
+/* HERO */
+.gal-hero{
+  min-height:42vh;
+  background:linear-gradient(135deg,var(--azul) 0%,#0a2a5a 50%,var(--rojo) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:7rem 2rem 4rem;
+  position:relative;overflow:hidden;
+}
+.gal-hero::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    -45deg,transparent,transparent 30px,rgba(255,255,255,0.03) 30px,rgba(255,255,255,0.03) 31px
+  );
+}
+.gal-hero-eyebrow{
+  font-size:0.7rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--amarillo);margin-bottom:0.75rem;position:relative;z-index:1;
+}
+.gal-hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,8vw,6rem);
+  line-height:0.95;letter-spacing:0.03em;
+  position:relative;z-index:1;color:#fff;
+}
+.gal-hero-title span{color:var(--amarillo)}
+
+/* BANDERA */
+.bandera{display:grid;grid-template-columns:2fr 1fr 1fr;height:7px}
+.b-am{background:var(--amarillo)}.b-az{background:var(--azul)}.b-ro{background:var(--rojo)}
+
+/* FILTERS */
+.filter-bar{
+  padding:2.5rem 1.5rem 0;
+  display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;
+}
+.filter-btn{
+  background:var(--blanco);
+  border:2px solid rgba(0,0,0,0.1);
+  color:var(--texto-suave);
+  font-family:'Nunito',sans-serif;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  padding:0.55rem 1.35rem;border-radius:50px;cursor:pointer;
+  transition:all 0.2s;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+.filter-btn:hover{border-color:var(--rojo);color:var(--rojo)}
+.filter-btn.active{background:var(--rojo);border-color:var(--rojo);color:#fff;box-shadow:0 4px 16px rgba(214,50,40,0.3)}
+
+/* MASONRY */
+.gal-section{padding:2.5rem 1.5rem 5rem;max-width:1200px;margin:0 auto}
+
+.masonry{columns:3;column-gap:0.85rem}
+@media(max-width:900px){.masonry{columns:2}}
+@media(max-width:500px){.masonry{columns:1}}
+
+.masonry-item{
+  break-inside:avoid;margin-bottom:0.85rem;
+  position:relative;border-radius:12px;overflow:hidden;cursor:pointer;
+  box-shadow:0 3px 16px rgba(0,0,0,0.1);
+  transition:transform 0.25s,box-shadow 0.25s;
+}
+.masonry-item:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(0,0,0,0.16)}
+
+.ph{
+  width:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+
+.masonry-item:nth-child(1) .ph{height:300px;background:linear-gradient(135deg,var(--azul),#0a3a7a)}
+.masonry-item:nth-child(2) .ph{height:200px;background:linear-gradient(135deg,var(--rojo),#8a1a10)}
+.masonry-item:nth-child(3) .ph{height:250px;background:linear-gradient(135deg,var(--amarillo),#9a6a00)}
+.masonry-item:nth-child(4) .ph{height:340px;background:linear-gradient(135deg,var(--verde),#0a4a1a)}
+.masonry-item:nth-child(5) .ph{height:200px;background:linear-gradient(135deg,var(--naranja),#7a3000)}
+.masonry-item:nth-child(6) .ph{height:280px;background:linear-gradient(135deg,var(--azul),var(--verde))}
+.masonry-item:nth-child(7) .ph{height:220px;background:linear-gradient(135deg,var(--rojo),var(--amarillo))}
+.masonry-item:nth-child(8) .ph{height:300px;background:linear-gradient(135deg,var(--verde),var(--azul))}
+.masonry-item:nth-child(9) .ph{height:240px;background:linear-gradient(135deg,var(--naranja),var(--rojo))}
+.masonry-item:nth-child(10) .ph{height:200px;background:linear-gradient(135deg,var(--amarillo),var(--naranja))}
+.masonry-item:nth-child(11) .ph{height:310px;background:linear-gradient(135deg,var(--azul),var(--rojo))}
+.masonry-item:nth-child(12) .ph{height:185px;background:linear-gradient(135deg,var(--verde),var(--amarillo))}
+
+.ph-icon{font-size:2.5rem;opacity:0.45;color:#fff;position:relative;z-index:1}
+.ph-label{
+  font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.15em;
+  color:rgba(255,255,255,0.35);margin-top:0.5rem;position:relative;z-index:1;text-transform:uppercase;
+}
+
+.item-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,0);
+  display:flex;align-items:flex-end;padding:1rem;transition:background 0.3s;
+}
+.masonry-item:hover .item-overlay{background:rgba(0,0,0,0.3)}
+.item-caption{
+  opacity:0;transform:translateY(8px);
+  transition:opacity 0.3s,transform 0.3s;
+  font-size:0.82rem;font-weight:700;color:#fff;
+  text-shadow:0 1px 4px rgba(0,0,0,0.8);
+}
+.masonry-item:hover .item-caption{opacity:1;transform:translateY(0)}
+
+/* CTA */
+.upload-cta{
+  text-align:center;padding:3rem 1.5rem;
+  border-top:2px solid rgba(0,0,0,0.07);
+  margin-top:1rem;
+}
+.upload-cta p{color:var(--texto-suave);font-size:0.95rem;margin-bottom:1.5rem;line-height:1.7}
+.upload-cta strong{color:var(--rojo)}
+
+/* LIGHTBOX */
+#lightbox{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,0.7);
+  align-items:center;justify-content:center;padding:2rem;
+  backdrop-filter:blur(6px);
+}
+#lightbox.open{display:flex}
+#lightbox-content{
+  max-width:560px;width:100%;background:var(--blanco);
+  border-radius:20px;padding:3rem 2rem;text-align:center;
+  position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.3);
+}
+#lightbox-close{
+  position:absolute;top:1rem;right:1rem;
+  background:var(--gris-claro);border:none;color:var(--texto-suave);
+  width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;
+  transition:background 0.2s;display:flex;align-items:center;justify-content:center;
+}
+#lightbox-close:hover{background:var(--rojo);color:#fff}
+#lightbox-icon{font-size:3.5rem;margin-bottom:1rem}
+#lightbox-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.05em;color:var(--rojo);margin-bottom:0.5rem}
+#lightbox-sub{font-size:0.85rem;color:var(--texto-suave)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.9rem 2rem;border-radius:50px;
+  font-weight:900;font-size:0.83rem;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;transition:transform 0.18s,box-shadow 0.18s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,0.15)}
+.btn-rojo{background:var(--rojo);color:#fff}
+.btn-outline{border:2px solid var(--azul);color:var(--azul);background:transparent}
+
+footer{
+  background:var(--texto);padding:1.5rem;text-align:center;
+  font-size:0.75rem;color:rgba(255,255,255,0.3);
+}
+footer a{color:var(--amarillo);text-decoration:none;font-weight:700}
+footer a:hover{color:var(--rojo)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">🇪🇨 Ecuadorian Roots</a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="gal-hero">
+  <p class="gal-hero-eyebrow">Ecuadorian Roots Dance Group — Brisbane 2026</p>
+  <h1 class="gal-hero-title">OUR <span>GALLERY</span></h1>
+</div>
+<div class="bandera"><div class="b-am"></div><div class="b-az"></div><div class="b-ro"></div></div>
+
+<div class="filter-bar reveal">
+  <button class="filter-btn active" onclick="filterGal('all',this)">All</button>
+  <button class="filter-btn" onclick="filterGal('rehearsals',this)">Rehearsals</button>
+  <button class="filter-btn" onclick="filterGal('events',this)">Events</button>
+  <button class="filter-btn" onclick="filterGal('dances',this)">Dances</button>
+</div>
+
+<div class="gal-section">
+  <div class="masonry" id="galeria-grid">
+    <div class="masonry-item reveal" data-cat="rehearsals" onclick="openLightbox('Ensayo — Marimba Juyayay','Southbank Brisbane, Abril 2026')">
+      <div class="ph"><div class="ph-icon">🥁</div><div class="ph-label">Ensayo · Marimba</div></div>
+      <div class="item-overlay"><div class="item-caption">Ensayo — Marimba Juyayay</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="events" onclick="openLightbox('Luminous Parade','Southbank Flowstate, Abril 2026')">
+      <div class="ph"><div class="ph-icon">✨</div><div class="ph-label">Luminous Parade</div></div>
+      <div class="item-overlay"><div class="item-caption">Luminous Parade — Southbank</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="dances" onclick="openLightbox('San Juanito','Repertorio Andino')">
+      <div class="ph"><div class="ph-icon">🎶</div><div class="ph-label">San Juanito</div></div>
+      <div class="item-overlay"><div class="item-caption">San Juanito — Sierra Andina</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="rehearsals" onclick="openLightbox('Ensayo General','Brisbane QLD, Mayo 2026')">
+      <div class="ph"><div class="ph-icon">💃</div><div class="ph-label">Ensayo General</div></div>
+      <div class="item-overlay"><div class="item-caption">Ensayo General — Mayo 2026</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="events" onclick="openLightbox('Inti Raymi Parade','Southbank, Mayo 2026')">
+      <div class="ph"><div class="ph-icon">☀️</div><div class="ph-label">Inti Raymi</div></div>
+      <div class="item-overlay"><div class="item-caption">Inti Raymi Parade</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="dances" onclick="openLightbox('Rosalía','Danza de la Sierra')">
+      <div class="ph"><div class="ph-icon">🌾</div><div class="ph-label">Rosalía</div></div>
+      <div class="item-overlay"><div class="item-caption">Rosalía — Danza de la Sierra</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="rehearsals" onclick="openLightbox('Ensayo Mix Kamari','Brisbane, Junio 2026')">
+      <div class="ph"><div class="ph-icon">🎵</div><div class="ph-label">Mix Kamari</div></div>
+      <div class="item-overlay"><div class="item-caption">Mix Kamari — Ensayo</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="events" onclick="openLightbox('Multicultural Australia','Debut Oficial — 20 Jun 2026')">
+      <div class="ph"><div class="ph-icon">🇪🇨</div><div class="ph-label">Debut Oficial</div></div>
+      <div class="item-overlay"><div class="item-caption">Debut — Multicultural Australia</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="dances" onclick="openLightbox('Mix de Raíces','Presentación completa')">
+      <div class="ph"><div class="ph-icon">🎭</div><div class="ph-label">Mix Raíces</div></div>
+      <div class="item-overlay"><div class="item-caption">Mix de Raíces Ecuatorianas</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="rehearsals" onclick="openLightbox('Ensayo Vestuario','Trajes tradicionales')">
+      <div class="ph"><div class="ph-icon">👗</div><div class="ph-label">Vestuario</div></div>
+      <div class="item-overlay"><div class="item-caption">Vestuario Tradicional</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="events" onclick="openLightbox('Luminous Parade — Julio','Southbank, Julio 2026')">
+      <div class="ph"><div class="ph-icon">🌟</div><div class="ph-label">Parade Julio</div></div>
+      <div class="item-overlay"><div class="item-caption">Luminous Parade — Julio</div></div>
+    </div>
+    <div class="masonry-item reveal" data-cat="dances" onclick="openLightbox('Marimba Afroecuatoriana','Patrimonio UNESCO')">
+      <div class="ph"><div class="ph-icon">🥁</div><div class="ph-label">Marimba</div></div>
+      <div class="item-overlay"><div class="item-caption">Marimba — Patrimonio UNESCO</div></div>
+    </div>
+  </div>
+
+  <div class="upload-cta reveal">
+    <p>📸 We are growing — <strong>real photos and videos coming soon</strong> from our performances.<br>Follow us on social media to see our Inti Raymi 2026 rehearsals.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="index.html#contacto" class="btn btn-rojo">💬 Contact Us</a>
+      <a href="index.html" class="btn btn-outline">← Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<div id="lightbox" onclick="closeLightbox(event)">
+  <div id="lightbox-content">
+    <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div id="lightbox-icon">📸</div>
+    <div id="lightbox-title">Título</div>
+    <div id="lightbox-sub">Descripción</div>
+    <p style="margin-top:1.25rem;font-size:0.8rem;color:#aaa">Photo coming soon</p>
+  </div>
+</div>
+
+<footer>
+  © 2026 Ecuadorian Roots Dance Group · Brisbane 🇪🇨🇦🇺 ·
+  Desarrollado por <a href="mailto:ecuadorianrootsbne@gmail.com">Carlos Fiallos</a>
+</footer>
+
+<script>
+function filterGal(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.masonry-item').forEach(item=>{
+    item.style.display=(cat==='all'||item.dataset.cat===cat)?'block':'none';
+  });
+}
+function openLightbox(title,sub){
+  document.getElementById('lightbox-title').textContent=title;
+  document.getElementById('lightbox-sub').textContent=sub;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(e){
+  if(!e||e.target===document.getElementById('lightbox')||e.target===document.getElementById('lightbox-close')){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox({target:document.getElementById('lightbox')})});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

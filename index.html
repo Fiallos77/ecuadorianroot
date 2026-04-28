@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecuadorian Roots Dance Group – Brisbane</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+:root{
+  --amarillo:#F2A800;
+  --rojo:#D63228;
+  --azul:#1A5CA8;
+  --verde:#217A3C;
+  --naranja:#E8650A;
+  --crema:#FFFBF2;
+  --blanco:#FFFFFF;
+  --gris-claro:#F5F5F0;
+  --texto:#1A1A1A;
+  --texto-suave:#555;
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--texto);overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;width:100%;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:64px;
+  background:rgba(255,251,242,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:4px solid var(--amarillo);
+  box-shadow:0 2px 20px rgba(0,0,0,0.08);
+}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{
+  color:var(--texto-suave);text-decoration:none;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  transition:color 0.2s;padding-bottom:2px;border-bottom:2px solid transparent;
+}
+.nav-links a:hover{color:var(--rojo);border-color:var(--rojo)}
+
+/* HERO */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;
+  padding:80px 2rem 5rem;
+}
+.slide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:0;transition:opacity 1.2s ease;z-index:0;
+}
+.slide.active{opacity:1}
+.slide-sierra{background:url('sierra.jpg') center/cover no-repeat,linear-gradient(135deg,#2a4a8a,#1a3a5a)}
+.slide-costa{background:url('costa.jpg') center/cover no-repeat,linear-gradient(135deg,#8a2a1a,#5a1a0a)}
+.slide-oriente{background:url('oriente.jpg') center/cover no-repeat,linear-gradient(135deg,#1a5a2a,#0a3a1a)}
+.slide-galapagos{background:url('galapagos.jpg') center/cover no-repeat,linear-gradient(135deg,#1a3a6a,#0a2a5a)}
+
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.25) 40%,rgba(0,0,0,0.7) 100%);
+}
+.region-label{
+  position:absolute;top:5.5rem;right:2rem;z-index:5;
+  font-family:'Bebas Neue',sans-serif;font-size:0.82rem;letter-spacing:0.2em;
+  color:rgba(255,255,255,0.8);border-left:3px solid var(--amarillo);padding-left:0.75rem;
+}
+.hero-content{position:relative;z-index:3;max-width:860px}
+.hero-eyebrow{
+  font-size:0.7rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--amarillo);margin-bottom:1rem;
+  animation:fadeUp 0.7s 0.2s ease both;
+  text-shadow:0 2px 8px rgba(0,0,0,0.9);
+  background:rgba(0,0,0,0.35);
+  display:inline-block;padding:0.4rem 1.2rem;border-radius:50px;
+  border:none;outline:none;
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.5rem,11vw,8.5rem);
+  line-height:0.88;letter-spacing:0.02em;margin-bottom:0.5rem;
+  animation:fadeUp 0.8s 0.4s ease both;
+}
+.ht1{display:block;color:#fff;text-shadow:3px 3px 0 rgba(0,0,0,0.3)}
+.ht2{display:block;color:var(--amarillo);text-shadow:0 0 40px rgba(242,168,0,0.5),3px 3px 0 rgba(0,0,0,0.3)}
+.ht3{display:block;color:rgba(255,255,255,0.85);font-size:clamp(1.8rem,4vw,3.2rem);letter-spacing:0.15em;margin-top:0.25rem}
+.hero-divider{
+  width:100px;height:4px;margin:1.25rem auto;
+  background:linear-gradient(90deg,var(--rojo),var(--amarillo),var(--azul));
+  border-radius:2px;animation:fadeUp 0.8s 0.6s ease both;
+}
+.hero-sub{
+  font-size:clamp(0.9rem,1.7vw,1.05rem);color:rgba(255,255,255,0.85);
+  max-width:560px;margin:0 auto 2.5rem;line-height:1.8;
+  text-shadow:0 1px 4px rgba(0,0,0,0.4);animation:fadeUp 0.8s 0.8s ease both;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp 0.8s 1s ease both}
+
+.region-indicators{
+  position:absolute;bottom:5.5rem;left:50%;transform:translateX(-50%);
+  z-index:5;display:flex;gap:0.75rem;
+}
+.region-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,0.4);border:2px solid rgba(255,255,255,0.6);
+  cursor:pointer;transition:all 0.3s;
+}
+.region-dot.active{background:var(--amarillo);border-color:var(--amarillo);transform:scale(1.3)}
+.bandera-hero{
+  position:absolute;bottom:0;left:0;right:0;height:8px;z-index:4;
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+}
+.bh-am{background:var(--amarillo)}.bh-az{background:var(--azul)}.bh-ro{background:var(--rojo)}
+
+/* BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:1rem 2.2rem;border-radius:50px;
+  font-weight:900;font-size:0.83rem;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;transition:transform 0.18s,box-shadow 0.18s;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.2)}
+.btn-amarillo{background:var(--amarillo);color:#fff}
+.btn-rojo{background:var(--rojo);color:#fff}
+.btn-azul{background:var(--azul);color:#fff}
+.btn-verde{background:var(--verde);color:#fff}
+.btn-outline-white{border:2px solid rgba(255,255,255,0.7);color:#fff;background:rgba(255,255,255,0.1)}
+.btn-outline-rojo{border:2px solid var(--rojo);color:var(--rojo);background:transparent}
+
+/* DIVIDERS */
+.bandera{display:grid;grid-template-columns:2fr 1fr 1fr;height:6px}
+.b-am{background:var(--amarillo)}.b-az{background:var(--azul)}.b-ro{background:var(--rojo)}
+
+/* SECTIONS */
+section{padding:6rem 1.5rem}
+.inner{max-width:1120px;margin:0 auto}
+.s-tag{
+  display:inline-block;font-size:0.65rem;font-weight:900;
+  letter-spacing:0.22em;text-transform:uppercase;
+  padding:0.32rem 0.85rem;border-radius:50px;margin-bottom:1rem;
+}
+.tag-rojo{background:var(--rojo);color:#fff}
+.tag-azul{background:var(--azul);color:#fff}
+.tag-amarillo{background:var(--amarillo);color:#fff}
+.tag-verde{background:var(--verde);color:#fff}
+.tag-naranja{background:var(--naranja);color:#fff}
+
+.s-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,6vw,5rem);
+  line-height:0.95;letter-spacing:0.03em;margin-bottom:1.5rem;color:var(--texto);
+}
+.s-title span{color:var(--rojo)}
+.s-title em{color:var(--azul);font-style:normal}
+
+/* ABOUT */
+#about{background:var(--blanco)}
+.nos-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;align-items:center}
+.nos-text p{font-size:1rem;line-height:1.85;color:var(--texto-suave);margin-bottom:1rem}
+.nos-text p strong{color:var(--rojo);font-weight:900}
+.nos-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat-box{border-radius:16px;padding:2rem 1.25rem;text-align:center}
+.stat-box:nth-child(1){background:var(--amarillo);color:#fff}
+.stat-box:nth-child(2){background:var(--azul);color:#fff}
+.stat-box:nth-child(3){background:var(--rojo);color:#fff}
+.stat-box:nth-child(4){background:var(--verde);color:#fff}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:3.2rem;line-height:1}
+.stat-lbl{font-size:0.67rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.85;margin-top:0.25rem}
+
+/* IDENTITY / REGIONS */
+#identity{background:var(--crema)}
+.regiones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2.5rem}
+.region-card{
+  border-radius:16px;overflow:hidden;
+  position:relative;aspect-ratio:3/4;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  cursor:default;transition:transform 0.25s,box-shadow 0.25s;
+  box-shadow:0 4px 20px rgba(0,0,0,0.12);
+}
+.region-card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(0,0,0,0.18)}
+.rc-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.4s}
+.region-card:hover .rc-bg{transform:scale(1.06)}
+.rc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.05) 55%)}
+.rc-content{position:relative;z-index:2;padding:1.25rem 1rem}
+.rc-icon{font-size:1.8rem;margin-bottom:0.4rem}
+.rc-region{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.06em;margin-bottom:0.2rem;color:#fff}
+.rc-danza{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem}
+.rc-desc{font-size:0.8rem;color:rgba(255,255,255,0.7);line-height:1.5}
+
+.rc-sierra .rc-bg{background:url('sierra.jpg') center/cover no-repeat,linear-gradient(135deg,#1a3a6a,#2a5a9a)}
+.rc-sierra .rc-danza{color:#7FB3FF}
+.rc-costa .rc-bg{background:url('costa.jpg') center/cover no-repeat,linear-gradient(135deg,#6a1a0a,#9a3a1a)}
+.rc-costa .rc-danza{color:#FFB36A}
+.rc-oriente .rc-bg{background:url('oriente.jpg') center/cover no-repeat,linear-gradient(135deg,#0a3a1a,#1a6a2a)}
+.rc-oriente .rc-danza{color:#7FD47F}
+.rc-galapagos .rc-bg{background:url('galapagos.jpg') center/cover no-repeat,linear-gradient(135deg,#0a2a4a,#1a4a7a)}
+.rc-galapagos .rc-danza{color:var(--amarillo)}
+
+/* DANCES */
+#dances{background:var(--gris-claro)}
+#dances .s-title{color:var(--texto)}
+.danzas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.25rem;margin-top:1.5rem}
+.danza-card{
+  background:var(--blanco);border-radius:16px;padding:2.25rem 1.75rem;
+  position:relative;overflow:hidden;
+  transition:transform 0.25s,box-shadow 0.25s;
+  box-shadow:0 2px 16px rgba(0,0,0,0.07);
+}
+.danza-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;border-radius:16px 16px 0 0}
+.danza-card:nth-child(1)::before{background:var(--amarillo)}
+.danza-card:nth-child(2)::before{background:var(--rojo)}
+.danza-card:nth-child(3)::before{background:var(--naranja)}
+.danza-card:nth-child(4)::before{background:var(--verde)}
+.danza-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
+.danza-bg-num{
+  font-family:'Bebas Neue',sans-serif;font-size:6rem;
+  color:rgba(0,0,0,0.04);position:absolute;bottom:-1.5rem;right:0.75rem;
+  line-height:1;pointer-events:none;
+}
+.danza-icon{font-size:2rem;margin-bottom:0.85rem}
+.danza-name{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:0.04em;margin-bottom:0.25rem;color:var(--texto)}
+.danza-region{font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--texto-suave);margin-bottom:0.5rem}
+.danza-desc{font-size:0.87rem;color:var(--texto-suave);line-height:1.65}
+
+/* EVENTS */
+#events{background:var(--blanco)}
+#events .s-title{color:var(--texto)}
+.debut-card{
+  background:linear-gradient(135deg,var(--rojo),#9a1a10);
+  border-radius:16px;padding:2.5rem;margin-bottom:2.5rem;
+  display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+  box-shadow:0 8px 32px rgba(214,50,40,0.35);
+}
+.debut-card::before{
+  content:'⭐ OFFICIAL DEBUT ⭐';
+  position:absolute;top:1rem;right:1.5rem;
+  font-size:0.62rem;font-weight:900;letter-spacing:0.2em;color:rgba(255,255,255,0.7);
+}
+.debut-card::after{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.06);pointer-events:none;
+}
+.debut-fecha{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4.5vw,3.5rem);color:var(--amarillo);line-height:1.05}
+.debut-evento{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;margin-bottom:0.3rem}
+.debut-lugar{color:rgba(255,255,255,0.7);font-size:0.9rem}
+
+.etable-wrap{border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.08);overflow-x:auto}
+table.et{width:100%;border-collapse:collapse;font-size:0.85rem;min-width:560px}
+table.et thead th{
+  background:var(--azul);color:#fff;
+  font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;
+  padding:0.9rem 1rem;text-align:left;white-space:nowrap;
+}
+table.et tbody tr{border-bottom:1px solid rgba(0,0,0,0.06);background:#fff;transition:background 0.15s}
+table.et tbody tr:hover{background:var(--crema)}
+table.et tbody td{padding:0.75rem 1rem;color:var(--texto-suave);white-space:nowrap}
+table.et tbody td:first-child{font-weight:700;color:var(--texto)}
+.rb{
+  background:rgba(242,168,0,0.15);color:var(--naranja);
+  font-size:0.72rem;font-weight:700;letter-spacing:0.06em;
+  padding:0.2rem 0.65rem;border-radius:50px;display:inline-block;
+}
+
+/* GALLERY */
+#gallery{background:var(--crema)}
+#gallery .s-title{color:var(--texto)}
+.gal-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:210px 210px;gap:0.75rem;margin-top:2rem;
+}
+.gal-cell{
+  border-radius:12px;overflow:hidden;position:relative;cursor:pointer;
+  transition:transform 0.25s,box-shadow 0.25s;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.4rem;
+  box-shadow:0 2px 12px rgba(0,0,0,0.1);
+}
+.gal-cell:hover{transform:scale(1.025);box-shadow:0 10px 30px rgba(0,0,0,0.15)}
+.gal-cell.big{grid-row:span 2}
+.gal-cell:nth-child(1){background:linear-gradient(135deg,var(--azul),#0a3a7a)}
+.gal-cell:nth-child(2){background:linear-gradient(135deg,var(--rojo),#8a1a10)}
+.gal-cell:nth-child(3){background:linear-gradient(135deg,var(--amarillo),#9a6a00)}
+.gal-cell:nth-child(4){background:linear-gradient(135deg,var(--verde),#0a4a1a)}
+.gal-cell:nth-child(5){background:linear-gradient(135deg,var(--naranja),#7a3000)}
+.gal-icon{font-size:2.8rem;opacity:0.5;color:#fff}
+.gal-txt{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.12em;color:rgba(255,255,255,0.5);text-align:center;padding:0 0.75rem}
+.gal-cta{text-align:center;margin-top:2rem}
+
+/* CONTACT */
+#contact{background:#EEF4FF}
+#contact .s-title{color:var(--texto)}
+.c-intro{color:var(--texto-suave);font-size:1rem;max-width:520px;line-height:1.8;margin-bottom:3rem}
+.c-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.c-card{
+  background:var(--blanco);border-radius:16px;padding:2rem 1.5rem;text-align:center;
+  text-decoration:none;color:var(--texto);
+  transition:transform 0.2s,box-shadow 0.2s;display:block;
+  box-shadow:0 2px 16px rgba(0,0,0,0.07);
+}
+.c-card:hover{transform:translateY(-5px);box-shadow:0 14px 35px rgba(0,0,0,0.12)}
+.c-ico{font-size:2.2rem;margin-bottom:0.75rem}
+.c-tit{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.05em;color:var(--azul);margin-bottom:0.25rem}
+.c-sbt{font-size:0.78rem;color:var(--texto-suave)}
+
+/* FOOTER */
+footer{
+  background:var(--texto);padding:2rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.f-brand{font-family:'Bebas Neue',sans-serif;color:var(--amarillo);font-size:1.1rem;letter-spacing:0.1em}
+.f-brand small{display:block;font-family:'Nunito',sans-serif;font-size:0.68rem;font-weight:400;color:rgba(255,255,255,0.3);letter-spacing:0.03em;margin-top:0.15rem}
+.f-dev{font-size:0.78rem;color:rgba(255,255,255,0.35);text-align:right}
+.f-dev a{color:var(--amarillo);text-decoration:none;font-weight:700}
+.f-dev a:hover{color:var(--rojo)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-l{opacity:0;transform:translateX(-40px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal-r{opacity:0;transform:translateX(40px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.on,.reveal-l.on,.reveal-r.on{opacity:1;transform:none}
+
+/* HAMBURGER */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  background:none;border:none;padding:0.25rem;
+}
+.hamburger span{display:block;width:24px;height:2px;background:var(--rojo);border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.mobile-menu{
+  display:none;position:fixed;top:64px;left:0;right:0;z-index:999;
+  background:rgba(255,251,242,0.98);backdrop-filter:blur(12px);
+  border-bottom:3px solid var(--amarillo);
+  flex-direction:column;padding:1rem 0;
+  box-shadow:0 8px 24px rgba(0,0,0,0.1);
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  color:var(--texto);text-decoration:none;
+  font-size:0.85rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  padding:1rem 2rem;border-bottom:1px solid rgba(0,0,0,0.06);transition:color 0.2s,background 0.2s;
+}
+.mobile-menu a:hover{color:var(--rojo);background:rgba(242,168,0,0.06)}
+
+/* RESPONSIVE */
+@media(max-width:900px){.regiones-grid{grid-template-columns:1fr 1fr}.region-card{aspect-ratio:4/3}}
+@media(max-width:768px){
+  nav{padding:0 1rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .nos-grid{grid-template-columns:1fr;gap:2.5rem}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gal-cell.big{grid-row:span 1}
+  footer{flex-direction:column;text-align:center}.f-dev{text-align:center}
+  .debut-card{flex-direction:column;gap:1.25rem}
+  section{padding:4rem 1.25rem}
+}
+@media(max-width:480px){
+  .regiones-grid{grid-template-columns:1fr}
+  .nos-stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" style="font-size:1.6rem;text-decoration:none">🇪🇨</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#identity">Our Identity</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#identity" onclick="closeMenu()">Our Identity</a>
+  <a href="#events" onclick="closeMenu()">Events</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="slide slide-sierra active"></div>
+  <div class="slide slide-costa"></div>
+  <div class="slide slide-oriente"></div>
+  <div class="slide slide-galapagos"></div>
+  <div class="hero-overlay"></div>
+  <div class="region-label" id="region-label">🏔️ SIERRA — SANJUANITO</div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Brisbane, Australia · Folkloric Dance Group · 2026</p>
+    <h1 class="hero-title">
+      <span class="ht1">ECUADORIAN</span>
+      <span class="ht2">ROOTS</span>
+      <span class="ht3">DANCE GROUP</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Four regions, one identity. We bring the soul of Ecuador to the heart of Australia — dance, culture and living roots in Brisbane.</p>
+    <div class="hero-btns">
+      <a href="#events" class="btn btn-amarillo">📅 Upcoming Events</a>
+      <a href="#contact" class="btn btn-outline-white">💬 Contact Us</a>
+    </div>
+  </div>
+
+  <div class="region-indicators">
+    <div class="region-dot active" onclick="goSlide(0)"></div>
+    <div class="region-dot" onclick="goSlide(1)"></div>
+    <div class="region-dot" onclick="goSlide(2)"></div>
+    <div class="region-dot" onclick="goSlide(3)"></div>
+  </div>
+  <div class="bandera-hero"><div class="bh-am"></div><div class="bh-az"></div><div class="bh-ro"></div></div>
+</section>
+
+<div class="bandera"><div class="b-am"></div><div class="b-az"></div><div class="b-ro"></div></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="nos-grid">
+      <div class="reveal-l">
+        <span class="s-tag tag-rojo">Who We Are</span>
+        <h2 class="s-title">BORN FROM <span>ECUADORIAN PRIDE</span></h2>
+        <p>Ecuadorian Roots Dance Group is a folkloric dance group founded in Brisbane, Australia. Our mission: to share the richness of Ecuadorian culture with the multicultural Australian community.</p>
+        <p>We represent the <strong>4 regions of Ecuador</strong> — Sierra, Coast, Amazon and Galápagos — through their most authentic dances: Sanjuanito, Bomba del Chota, Amorfino and Shuar dances.</p>
+        <p>We are preparing for our <strong>official debut on June 20, 2026</strong> at Inti Raymi — Multicultural Australia. A historic moment for our community in Brisbane!</p>
+      </div>
+      <div class="nos-stats reveal-r">
+        <div class="stat-box"><div class="stat-num">2026</div><div class="stat-lbl">Founded</div></div>
+        <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Regions of Ecuador</div></div>
+        <div class="stat-box"><div class="stat-num">BNE</div><div class="stat-lbl">Brisbane, QLD</div></div>
+        <div class="stat-box"><div class="stat-num">🇪🇨</div><div class="stat-lbl">Ecuadorian Heart</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bandera" style="grid-template-columns:1fr 2fr 1fr"><div class="b-ro"></div><div class="b-az"></div><div class="b-am"></div></div>
+
+<!-- OUR IDENTITY -->
+<section id="identity">
+  <div class="inner">
+    <span class="s-tag tag-azul reveal">The 4 Regions of Ecuador</span>
+    <h2 class="s-title reveal">OUR <em>IDENTITY</em></h2>
+    <div class="regiones-grid">
+      <div class="region-card rc-sierra reveal">
+        <div class="rc-bg"></div><div class="rc-overlay"></div>
+        <div class="rc-content">
+          <div class="rc-icon">🏔️</div>
+          <div class="rc-region">Sierra</div>
+          <div class="rc-danza">Sanjuanito · Albazo · Danzante</div>
+          <div class="rc-desc">The Andes with red ponchos, straw hats and the unmistakable joy of the Sanjuanito — Ecuador's national rhythm.</div>
+        </div>
+      </div>
+      <div class="region-card rc-costa reveal">
+        <div class="rc-bg"></div><div class="rc-overlay"></div>
+        <div class="rc-content">
+          <div class="rc-icon">🌊</div>
+          <div class="rc-region">Coast</div>
+          <div class="rc-danza">Amorfino · Alza · Pasacalle</div>
+          <div class="rc-desc">The vibrant montubio culture of Ecuador's Pacific coast — spontaneous verse, song and dance all in one.</div>
+        </div>
+      </div>
+      <div class="region-card rc-oriente reveal">
+        <div class="rc-bg"></div><div class="rc-overlay"></div>
+        <div class="rc-content">
+          <div class="rc-icon">🌿</div>
+          <div class="rc-region">Amazon</div>
+          <div class="rc-danza">Shuar Dance · Kichwa Dance</div>
+          <div class="rc-desc">The Ecuadorian Amazon with colourful feathers, chonta spears and the deep spirit of the rainforest.</div>
+        </div>
+      </div>
+      <div class="region-card rc-galapagos reveal">
+        <div class="rc-bg"></div><div class="rc-overlay"></div>
+        <div class="rc-content">
+          <div class="rc-icon">🏝️</div>
+          <div class="rc-region">Galápagos</div>
+          <div class="rc-danza">Bomba del Chota · Pasillo</div>
+          <div class="rc-desc">The unique island culture of the Enchanted Islands — where the coastal pasillo meets the spirit of the sea.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="bandera"><div class="b-am"></div><div class="b-az"></div><div class="b-ro"></div></div>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="inner">
+    <span class="s-tag tag-rojo reveal">Inti Raymi Calendar</span>
+    <h2 class="s-title reveal">EVENTS <span>2026</span></h2>
+    <div class="debut-card reveal">
+      <div class="debut-fecha">SAT 20 JUN<br>11AM</div>
+      <div>
+        <div class="debut-evento">🎉 INTI RAYMI 2026</div>
+        <div class="debut-lugar">📍 Multicultural Australia · Brisbane</div>
+        <div class="debut-lugar" style="margin-top:0.35rem;font-style:italic;font-size:0.82rem">Full performance — all rhythms</div>
+      </div>
+    </div>
+    <div class="etable-wrap reveal">
+      <table class="et">
+        <thead><tr><th>Time</th><th>Date</th><th>Rhythm</th><th>Music</th><th>Event</th><th>Location</th></tr></thead>
+        <tbody>
+          <tr><td>4PM</td><td>Sat 25 Apr</td><td><span class="rb">Marimba</span></td><td>Jayac</td><td>Inti Raymi / Luminous Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 2 May</td><td><span class="rb">Marimba</span></td><td>Jayac</td><td>Inti Raymi / Luminous Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 9 May</td><td><span class="rb">Marimba</span></td><td>Jayac</td><td>Inti Raymi / Luminous Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 16 May</td><td><span class="rb">Sanjuanito</span></td><td>Mix Kamari</td><td>Inti Raymi / Luminous Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 23 May</td><td><span class="rb">Sanjuanito</span></td><td>Mix Kamari</td><td>Inti Raymi / Luminous Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 30 May</td><td><span class="rb">Sanjuanito</span></td><td>Mix Kamari</td><td>Inti Raymi / Luminous Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 6 Jun</td><td><span class="rb">Mix</span></td><td>Mix</td><td>Inti Raymi / Luminous Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 13 Jun</td><td><span class="rb">Mix</span></td><td>Mix</td><td>Inti Raymi / Luminous Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 27 Jun</td><td><span class="rb">Mix</span></td><td>Mix</td><td>Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 4 Jul</td><td><span class="rb">Mix</span></td><td>Mix</td><td>Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 11 Jul</td><td><span class="rb">Mix</span></td><td>Mix</td><td>Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 18 Jul</td><td><span class="rb">Mix</span></td><td>Mix</td><td>Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>3PM</td><td>Sat 25 Jul</td><td><span class="rb">Mix</span></td><td>Mix</td><td>Parade</td><td>Southbank (Flowstate)</td></tr>
+          <tr><td>5PM</td><td>Fri 31 Jul</td><td><span class="rb">Performance</span></td><td>Defile ~1hr</td><td>Luminous Parade</td><td>Southbank</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="bandera" style="grid-template-columns:1fr 2fr 1fr"><div class="b-ro"></div><div class="b-am"></div><div class="b-az"></div></div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="inner">
+    <span class="s-tag tag-verde reveal">Our Moments</span>
+    <h2 class="s-title reveal">GALLERY <em>ECUADORIAN ROOTS</em></h2>
+    <div class="gal-grid reveal">
+      <div class="gal-cell big"><div class="gal-icon">📸</div><div class="gal-txt">Photos coming soon</div></div>
+      <div class="gal-cell"><div class="gal-icon">💃</div></div>
+      <div class="gal-cell"><div class="gal-icon">🥁</div></div>
+      <div class="gal-cell"><div class="gal-icon">🎶</div></div>
+      <div class="gal-cell"><div class="gal-icon">🇪🇨</div></div>
+    </div>
+    <div class="gal-cta reveal">
+      <a href="galeria.html" class="btn btn-azul">📷 View Full Gallery</a>
+    </div>
+  </div>
+</section>
+
+<div class="bandera"><div class="b-am"></div><div class="b-az"></div><div class="b-ro"></div></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <span class="s-tag tag-azul reveal">Want to See Us Dance?</span>
+    <h2 class="s-title reveal">CONTACT &amp; <em>BOOKINGS</em></h2>
+    <p class="c-intro reveal">Do you have a cultural event, festival or celebration in Brisbane? We are available for public and private performances. Get in touch!</p>
+    <div class="c-grid reveal">
+      <a href="https://wa.me/+610416485758" class="c-card" target="_blank">
+        <div class="c-ico">💬</div>
+        <div class="c-tit">WhatsApp</div>
+        <div class="c-sbt">+61 0416 485 758</div>
+      </a>
+      <a href="mailto:ecuadorianrootsbne@gmail.com" class="c-card">
+        <div class="c-ico">📧</div>
+        <div class="c-tit">Email</div>
+        <div class="c-sbt">ecuadorianrootsbne@gmail.com</div>
+      </a>
+      <a href="#" class="c-card">
+        <div class="c-ico">📍</div>
+        <div class="c-tit">Brisbane QLD</div>
+        <div class="c-sbt">Available across Australia</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand">
+    Ecuadorian Roots Dance Group
+    <small>Brisbane, Australia · 🇪🇨🇦🇺 · 2026</small>
+  </div>
+  <div class="f-dev">
+    Designed &amp; developed by <a href="https://wa.me/+610416485758">Carlos Fiallos</a><br>
+    Systems &amp; Web Development · <a href="https://wa.me/+610416485758">📱 +61 0416 485 758</a>
+  </div>
+</footer>
+<div class="bandera"><div class="b-am"></div><div class="b-az"></div><div class="b-ro"></div></div>
+
+<script>
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+const slides=document.querySelectorAll('.slide');
+const dots=document.querySelectorAll('.region-dot');
+const labels=['🏔️ SIERRA — SANJUANITO','🌊 COAST — AMORFINO','🌿 AMAZON — SHUAR DANCE','🏝️ GALÁPAGOS — PASILLO'];
+let current=0,timer;
+function goSlide(n){
+  slides[current].classList.remove('active');dots[current].classList.remove('active');
+  current=n;
+  slides[current].classList.add('active');dots[current].classList.add('active');
+  document.getElementById('region-label').textContent=labels[current];
+  clearInterval(timer);timer=setInterval(()=>goSlide((current+1)%4),4500);
+}
+timer=setInterval(()=>goSlide((current+1)%4),4500);
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
