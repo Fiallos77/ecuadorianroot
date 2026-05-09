@@ -40,6 +40,19 @@ nav{
   font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
   transition:color 0.2s;padding-bottom:2px;border-bottom:2px solid transparent;
 }
+/* Esto asegura que las imágenes llenen el espacio sin estirarse feo */
+.gal-cell img, .ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Recorta la imagen para que llene el contenedor */
+  display: block;
+}
+
+/* En la galería tipo masonry, deja que la altura sea automática */
+.masonry-item .ph {
+  height: auto !important; /* Sobreescribe los "height: 200px" que tienes en el CSS */
+  background: none !important;
+}
 .nav-links a:hover{color:var(--rojo);border-color:var(--rojo)}
 
 /* HERO */
