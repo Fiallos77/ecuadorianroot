@@ -37,6 +37,19 @@ nav{
   font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
   transition:color 0.2s;
 }
+/* Esto asegura que las imágenes llenen el espacio sin estirarse feo */
+.gal-cell img, .ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Recorta la imagen para que llene el contenedor */
+  display: block;
+}
+
+/* En la galería tipo masonry, deja que la altura sea automática */
+.masonry-item .ph {
+  height: auto !important; /* Sobreescribe los "height: 200px" que tienes en el CSS */
+  background: none !important;
+}
 .nav-back:hover{color:var(--rojo)}
 
 /* HERO */
@@ -217,31 +230,31 @@ footer a:hover{color:var(--rojo)}
 <div class="gal-section">
   <div class="masonry" id="galeria-grid">
     <div class="masonry-item reveal" data-cat="rehearsals" onclick="openLightbox('Ensayo — Marimba Juyayay','Southbank Brisbane, Abril 2026')">
-      <div class="ph"><div class="ph-icon">🥁</div><div class="ph-label">Ensayo · Marimba</div></div>
+      <div class="ph"><img src="1.jpeg" alt="Descripción" style="width:100%; display:block;"><div class="ph-label">Ensayo · Marimba</div></div>
       <div class="item-overlay"><div class="item-caption">Ensayo — Marimba Juyayay</div></div>
     </div>
     <div class="masonry-item reveal" data-cat="events" onclick="openLightbox('Luminous Parade','Southbank Flowstate, Abril 2026')">
-      <div class="ph"><div class="ph-icon">✨</div><div class="ph-label">Luminous Parade</div></div>
+      <div class="ph"><img src="2.jpeg" alt="Descripción" style="width:100%; display:block;"><div class="ph-label">Luminous Parade</div></div>
       <div class="item-overlay"><div class="item-caption">Luminous Parade — Southbank</div></div>
     </div>
     <div class="masonry-item reveal" data-cat="dances" onclick="openLightbox('San Juanito','Repertorio Andino')">
-      <div class="ph"><div class="ph-icon">🎶</div><div class="ph-label">San Juanito</div></div>
+      <div class="ph"><img src="3.jpeg" alt="Descripción" style="width:100%; display:block;"><div class="ph-label">San Juanito</div></div>
       <div class="item-overlay"><div class="item-caption">San Juanito — Sierra Andina</div></div>
     </div>
     <div class="masonry-item reveal" data-cat="rehearsals" onclick="openLightbox('Ensayo General','Brisbane QLD, Mayo 2026')">
-      <div class="ph"><div class="ph-icon">💃</div><div class="ph-label">Ensayo General</div></div>
+      <div class="ph"><img src="4.jpeg" alt="Descripción" style="width:100%; display:block;"><div class="ph-label">Ensayo General</div></div>
       <div class="item-overlay"><div class="item-caption">Ensayo General — Mayo 2026</div></div>
     </div>
     <div class="masonry-item reveal" data-cat="events" onclick="openLightbox('Inti Raymi Parade','Southbank, Mayo 2026')">
-      <div class="ph"><div class="ph-icon">☀️</div><div class="ph-label">Inti Raymi</div></div>
+      <div class="ph"><img src="5.jpeg" alt="Descripción" style="width:100%; display:block;"><div class="ph-label">Inti Raymi</div></div>
       <div class="item-overlay"><div class="item-caption">Inti Raymi Parade</div></div>
     </div>
     <div class="masonry-item reveal" data-cat="dances" onclick="openLightbox('Rosalía','Danza de la Sierra')">
-      <div class="ph"><div class="ph-icon">🌾</div><div class="ph-label">Rosalía</div></div>
+      <div class="ph"><img src="6.jpeg" alt="Descripción" style="width:100%; display:block;"><div class="ph-label">Rosalía</div></div>
       <div class="item-overlay"><div class="item-caption">Rosalía — Danza de la Sierra</div></div>
     </div>
     <div class="masonry-item reveal" data-cat="rehearsals" onclick="openLightbox('Ensayo Mix Kamari','Brisbane, Junio 2026')">
-      <div class="ph"><div class="ph-icon">🎵</div><div class="ph-label">Mix Kamari</div></div>
+      <div class="ph"><img src="7.jpeg" alt="Descripción" style="width:100%; display:block;"><div class="ph-label">Mix Kamari</div></div>
       <div class="item-overlay"><div class="item-caption">Mix Kamari — Ensayo</div></div>
     </div>
     <div class="masonry-item reveal" data-cat="events" onclick="openLightbox('Multicultural Australia','Debut Oficial — 20 Jun 2026')">
