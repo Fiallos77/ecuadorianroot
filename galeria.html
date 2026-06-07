@@ -37,19 +37,6 @@ nav{
   font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
   transition:color 0.2s;
 }
-/* Esto asegura que las imágenes llenen el espacio sin estirarse feo */
-.gal-cell img, .ph img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Recorta la imagen para que llene el contenedor */
-  display: block;
-}
-
-/* En la galería tipo masonry, deja que la altura sea automática */
-.masonry-item .ph {
-  height: auto !important; /* Sobreescribe los "height: 200px" que tienes en el CSS */
-  background: none !important;
-}
 .nav-back:hover{color:var(--rojo)}
 
 /* HERO */
@@ -205,6 +192,20 @@ footer a:hover{color:var(--rojo)}
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
 .reveal.on{opacity:1;transform:none}
+
+/* VIDEOS */
+.videos-section{padding:3rem 1.5rem 5rem;max-width:1200px;margin:0 auto}
+.videos-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
+.videos-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:0.05em;color:var(--texto)}
+.videos-filter{display:flex;gap:0.75rem;flex-wrap:wrap}
+.vf-btn{background:var(--blanco);border:2px solid rgba(0,0,0,0.1);color:var(--texto-suave);font-family:'Nunito',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 1.35rem;border-radius:50px;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.vf-btn:hover{border-color:var(--azul);color:var(--azul)}
+.vf-btn.active{background:var(--azul);border-color:var(--azul);color:#fff;box-shadow:0 4px 16px rgba(26,92,168,0.3)}
+.videos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+.video-item{border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.12);aspect-ratio:16/9;background:#000}
+.video-item iframe{width:100%;height:100%;border:none;display:block}
+.videos-divider{border:none;border-top:2px solid rgba(0,0,0,0.08);margin:0 1.5rem}
+@media(max-width:768px){.videos-header{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
@@ -278,7 +279,47 @@ footer a:hover{color:var(--rojo)}
       <div class="item-overlay"><div class="item-caption">Marimba — Patrimonio UNESCO</div></div>
     </div>
   </div>
+</div>
+<div class="videos-divider"></div>
 
+<div class="videos-section">
+  <div class="videos-header reveal">
+    <h2 class="videos-title">🎬 VIDEOS</h2>
+    <div class="videos-filter">
+      <button class="vf-btn active" onclick="filterVideos('all',this)">All</button>
+      <button class="vf-btn" onclick="filterVideos('rehearsal',this)">Rehearsals</button>
+      <button class="vf-btn" onclick="filterVideos('show',this)">Shows</button>
+    </div>
+  </div>
+  <div class="videos-grid reveal" id="videos-grid">
+    <div class="video-item" data-cat="rehearsal">
+      <iframe src="https://www.youtube.com/embed/U2eS4tSZufY" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-item" data-cat="rehearsal">
+      <iframe src="https://www.youtube.com/embed/Nd5oAElqR5o" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-item" data-cat="rehearsal">
+      <iframe src="https://www.youtube.com/embed/vbjpB7Twn-s" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-item" data-cat="rehearsal">
+      <iframe src="https://www.youtube.com/embed/6GVdnh98S4c" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-item" data-cat="rehearsal">
+      <iframe src="https://www.youtube.com/embed/rIrQS5SeMUE" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-item" data-cat="rehearsal">
+      <iframe src="https://www.youtube.com/embed/4WW0LkdYHfs" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-item" data-cat="rehearsal">
+      <iframe src="https://www.youtube.com/embed/ptv0nGxFHzI" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-item" data-cat="rehearsal">
+      <iframe src="https://www.youtube.com/embed/p2j2GD3kP2k" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <!-- SHOWS: cuando tengas videos de shows, cambia data-cat="show" -->
+    <!-- <div class="video-item" data-cat="show"><iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe></div> -->
+  </div>
+  
   <div class="upload-cta reveal">
     <p>📸 We are growing — <strong>real photos and videos coming soon</strong> from our performances.<br>Follow us on social media to see our Inti Raymi 2026 rehearsals.</p>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
@@ -286,8 +327,24 @@ footer a:hover{color:var(--rojo)}
       <a href="index.html" class="btn btn-outline">← Back to Home</a>
     </div>
   </div>
+  <div id="lightbox" onclick="closeLightbox(event)">
+  <div id="lightbox-content">
+    <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div id="lightbox-icon">📸</div>
+    <div id="lightbox-title">Título</div>
+    <div id="lightbox-sub">Descripción</div>
+    <p style="margin-top:1.25rem;font-size:0.8rem;color:#aaa">Photo coming soon</p>
+  </div>
 </div>
-
+  <div class="upload-cta reveal">
+    <p>📸 We are growing — <strong>real photos and videos coming soon</strong> from our performances.<br>Follow us on social media to see our Inti Raymi 2026 rehearsals.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="index.html#contacto" class="btn btn-rojo">💬 Contact Us</a>
+      <a href="index.html" class="btn btn-outline">← Back to Home</a>
+    </div>
+  </div> 
+</div>
+  
 <div id="lightbox" onclick="closeLightbox(event)">
   <div id="lightbox-content">
     <button id="lightbox-close" onclick="closeLightbox()">✕</button>
