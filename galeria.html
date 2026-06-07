@@ -223,17 +223,43 @@ footer a:hover{color:var(--rojo)}
 
 <div class="filter-bar reveal">
   <button class="filter-btn active" onclick="filterGal('all',this)">All</button>
-  <button class="filter-btn" onclick="filterGal('rehearsals',this)">Rehearsals</button>
-  <button class="filter-btn" onclick="filterGal('events',this)">Events</button>
-  <button class="filter-btn" onclick="filterGal('dances',this)">Dances</button>
+  <button class="filter-btn" onclick="filterGal('rehearsal',this)">Rehearsals</button>
+  <button class="filter-btn" onclick="filterGal('show',this)">Shows</button>
 </div>
 
 <div class="gal-section">
-  <div class="masonry" id="galeria-grid">
-    <div class="masonry-item reveal" data-cat="rehearsals" onclick="openLightbox('Ensayo — Marimba Juyayay','Southbank Brisbane, Abril 2026')">
-      <div class="ph"><div class="ph-icon">🥁</div><div class="ph-label">Ensayo · Marimba</div></div>
-      <div class="item-overlay"><div class="item-caption">Ensayo — Marimba Juyayay</div></div>
+      <div class="masonry" id="galeria-grid">
+      <div class="masonry-item reveal" data-cat="rehearsal">
+        <img src="1.jpeg" alt="Rehearsal 1" style="width:100%;display:block;border-radius:4px">
+        <div class="item-overlay"><div class="item-caption">Rehearsal — Ecuadorian Roots</div></div>
+      </div>
+      <div class="masonry-item reveal" data-cat="rehearsal">
+        <img src="2.jpeg" alt="Rehearsal 2" style="width:100%;display:block;border-radius:4px">
+        <div class="item-overlay"><div class="item-caption">Rehearsal — Ecuadorian Roots</div></div>
+      </div>
+      <div class="masonry-item reveal" data-cat="rehearsal">
+        <img src="3.jpeg" alt="Rehearsal 3" style="width:100%;display:block;border-radius:4px">
+        <div class="item-overlay"><div class="item-caption">Rehearsal — Ecuadorian Roots</div></div>
+      </div>
+      <div class="masonry-item reveal" data-cat="rehearsal">
+        <img src="4.jpeg" alt="Rehearsal 4" style="width:100%;display:block;border-radius:4px">
+        <div class="item-overlay"><div class="item-caption">Rehearsal — Ecuadorian Roots</div></div>
+      </div>
+      <div class="masonry-item reveal" data-cat="rehearsal">
+        <img src="5.jpeg" alt="Rehearsal 5" style="width:100%;display:block;border-radius:4px">
+        <div class="item-overlay"><div class="item-caption">Rehearsal — Ecuadorian Roots</div></div>
+      </div>
+      <div class="masonry-item reveal" data-cat="rehearsal">
+        <img src="6.jpeg" alt="Rehearsal 6" style="width:100%;display:block;border-radius:4px">
+        <div class="item-overlay"><div class="item-caption">Rehearsal — Ecuadorian Roots</div></div>
+      </div>
+      <div class="masonry-item reveal" data-cat="rehearsal">
+        <img src="7.jpeg" alt="Rehearsal 7" style="width:100%;display:block;border-radius:4px">
+        <div class="item-overlay"><div class="item-caption">Rehearsal — Ecuadorian Roots</div></div>
+      </div>
     </div>
+
+  </div>
     <div class="masonry-item reveal" data-cat="events" onclick="openLightbox('Luminous Parade','Southbank Flowstate, Abril 2026')">
       <div class="ph"><div class="ph-icon">✨</div><div class="ph-label">Luminous Parade</div></div>
       <div class="item-overlay"><div class="item-caption">Luminous Parade — Southbank</div></div>
@@ -322,14 +348,13 @@ footer a:hover{color:var(--rojo)}
     <!-- <div class="video-item" data-cat="show"><iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe></div> -->
   </div>
   
- 
   <div class="upload-cta reveal">
     <p>📸 We are growing — <strong>real photos and videos coming soon</strong> from our performances.<br>Follow us on social media to see our Inti Raymi 2026 rehearsals.</p>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
       <a href="index.html#contacto" class="btn btn-rojo">💬 Contact Us</a>
       <a href="index.html" class="btn btn-outline">← Back to Home</a>
     </div>
-  </div> 
+  </div>
   <div id="lightbox" onclick="closeLightbox(event)">
   <div id="lightbox-content">
     <button id="lightbox-close" onclick="closeLightbox()">✕</button>
@@ -339,7 +364,7 @@ footer a:hover{color:var(--rojo)}
     <p style="margin-top:1.25rem;font-size:0.8rem;color:#aaa">Photo coming soon</p>
   </div>
 </div>
-
+  
 </div>
 
 <footer>
