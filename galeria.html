@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery – Ecuadorian Roots Dance Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --amarillo:#F2A800;
+  --rojo:#D63228;
+  --azul:#1A5CA8;
+  --verde:#217A3C;
+  --naranja:#E8650A;
+  --crema:#FFFBF2;
+  --blanco:#FFFFFF;
+  --gris-claro:#F5F5F0;
+  --texto:#1A1A1A;
+  --texto-suave:#555;
+}
+body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--texto);overflow-x:hidden}
+
+nav{
+  position:fixed;top:0;width:100%;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:64px;
+  background:rgba(255,251,242,0.95);backdrop-filter:blur(12px);
+  border-bottom:4px solid var(--amarillo);
+  box-shadow:0 2px 20px rgba(0,0,0,0.08);
+}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.1em;color:var(--rojo);text-decoration:none}
+.nav-back{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  color:var(--texto-suave);text-decoration:none;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-back:hover{color:var(--rojo)}
+
+/* HERO */
+.gal-hero{
+  min-height:38vh;
+  background:linear-gradient(135deg,var(--azul) 0%,#0a2a5a 50%,var(--rojo) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:7rem 2rem 3.5rem;
+  position:relative;overflow:hidden;
+}
+.gal-hero::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    -45deg,transparent,transparent 30px,rgba(255,255,255,0.03) 30px,rgba(255,255,255,0.03) 31px
+  );
+}
+.gal-hero-eyebrow{
+  font-size:0.7rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--amarillo);margin-bottom:0.75rem;position:relative;z-index:1;
+}
+.gal-hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,8vw,6rem);
+  line-height:0.95;letter-spacing:0.03em;
+  position:relative;z-index:1;color:#fff;
+}
+.gal-hero-title span{color:var(--amarillo)}
+.gal-hero-sub{position:relative;z-index:1;color:rgba(255,255,255,0.75);font-size:0.9rem;margin-top:1rem;max-width:520px}
+
+/* BANDERA */
+.bandera{display:grid;grid-template-columns:2fr 1fr 1fr;height:7px}
+.b-am{background:var(--amarillo)}.b-az{background:var(--azul)}.b-ro{background:var(--rojo)}
+
+/* EVENT ACCORDION */
+.events-wrap{max-width:900px;margin:0 auto;padding:3rem 1.5rem 5rem}
+.event{
+  background:var(--blanco);border-radius:16px;margin-bottom:1rem;overflow:hidden;
+  box-shadow:0 3px 16px rgba(0,0,0,0.08);border:2px solid transparent;
+  transition:border-color 0.2s;
+}
+.event.open{border-color:var(--amarillo)}
+.event-head{
+  display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.4rem;cursor:pointer;
+  user-select:none;
+}
+.event-cover{
+  width:64px;height:64px;border-radius:12px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--azul),var(--rojo));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;color:#fff;overflow:hidden;
+}
+.event-cover img{width:100%;height:100%;object-fit:cover}
+.event-info{flex:1;min-width:0}
+.event-name{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:0.03em;color:var(--texto)}
+.event-meta{font-size:0.78rem;color:var(--texto-suave);margin-top:0.15rem}
+.event-count{font-size:0.72rem;font-weight:700;color:var(--rojo);text-transform:uppercase;letter-spacing:0.08em}
+.event-chevron{font-size:1.2rem;color:var(--texto-suave);transition:transform 0.25s;flex-shrink:0}
+.event.open .event-chevron{transform:rotate(180deg)}
+
+.event-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease}
+.event.open .event-body{max-height:6000px}
+.event-body-inner{padding:0 1.4rem 1.6rem}
+
+.event-empty{
+  padding:1.5rem 0.5rem;text-align:center;color:var(--texto-suave);font-size:0.85rem;
+  border-top:1px solid rgba(0,0,0,0.06);
+}
+
+.event-masonry{columns:3;column-gap:0.7rem;margin-top:0.5rem}
+@media(max-width:700px){.event-masonry{columns:2}}
+.event-masonry img{width:100%;display:block;border-radius:10px;margin-bottom:0.7rem;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+
+.event-videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.1rem}
+.event-videos .video-item{border-radius:10px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,0.12);aspect-ratio:16/9;background:#000}
+.event-videos .video-item iframe{width:100%;height:100%;border:none;display:block}
+
+/* CTA */
+.upload-cta{
+  text-align:center;padding:3rem 1.5rem;
+  border-top:2px solid rgba(0,0,0,0.07);
+}
+.upload-cta p{color:var(--texto-suave);font-size:0.95rem;margin-bottom:1.5rem;line-height:1.7}
+
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.9rem 2rem;border-radius:50px;
+  font-weight:900;font-size:0.83rem;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;transition:transform 0.18s,box-shadow 0.18s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,0.15)}
+.btn-rojo{background:var(--rojo);color:#fff}
+.btn-outline{border:2px solid var(--azul);color:var(--azul);background:transparent}
+
+footer{
+  background:var(--texto);padding:1.5rem;text-align:center;
+  font-size:0.75rem;color:rgba(255,255,255,0.3);
+}
+footer a{color:var(--amarillo);text-decoration:none;font-weight:700}
+footer a:hover{color:var(--rojo)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* LIGHTBOX */
+#lightbox{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,0.85);
+  align-items:center;justify-content:center;padding:2rem;
+}
+#lightbox.open{display:flex}
+#lightbox img{max-width:100%;max-height:100%;border-radius:8px}
+#lightbox-close{
+  position:absolute;top:1.2rem;right:1.2rem;
+  background:rgba(255,255,255,0.15);border:none;color:#fff;
+  width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+#lightbox-close:hover{background:var(--rojo)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">🇪🇨 Ecuadorian Roots</a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="gal-hero">
+  <p class="gal-hero-eyebrow">Ecuadorian Roots Dance Group — Brisbane 2026</p>
+  <h1 class="gal-hero-title">OUR <span>GALLERY</span></h1>
+  <p class="gal-hero-sub">Browse by event — tap a card to open its photos and videos.</p>
+</div>
+<div class="bandera"><div class="b-am"></div><div class="b-az"></div><div class="b-ro"></div></div>
+
+<div class="events-wrap">
+
+  <!-- REPASOS (Rehearsals) -->
+  <div class="event reveal" data-event>
+    <div class="event-head" data-toggle>
+      <div class="event-cover"><img src="1.jpeg" alt=""></div>
+      <div class="event-info">
+        <div class="event-name">Repasos</div>
+        <div class="event-meta">Weekly rehearsals · Brisbane 2026</div>
+      </div>
+      <div class="event-count">11 photos · 10 videos</div>
+      <div class="event-chevron">▾</div>
+    </div>
+    <div class="event-body">
+      <div class="event-body-inner">
+        <div class="event-masonry" data-lightbox-group>
+          <img src="1.jpeg" alt="Ensayo — Marimba Juyayay">
+          <img src="2.jpeg" alt="Luminous Parade">
+          <img src="3.jpeg" alt="San Juanito">
+          <img src="4.jpeg" alt="Ensayo General">
+          <img src="5.jpeg" alt="Inti Raymi Parade">
+          <img src="6.jpeg" alt="Rosalía">
+          <img src="7.jpeg" alt="Ensayo Mix Kamari">
+          <img src="8.jpeg" alt="Rehearsal">
+          <img src="9.jpeg" alt="Rehearsal">
+          <img src="10.jpeg" alt="Rehearsal">
+          <img src="11.jpeg" alt="Rehearsal">
+        </div>
+        <div class="event-videos">
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/U2eS4tSZufY" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/Nd5oAElqR5o" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/vbjpB7Twn-s" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/6GVdnh98S4c" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/rIrQS5SeMUE" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/4WW0LkdYHfs" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/ptv0nGxFHzI" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/p2j2GD3kP2k" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/5QcDB4rIID4" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-item"><iframe src="https://www.youtube.com/embed/4sJeVf6PhU4" allowfullscreen loading="lazy"></iframe></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IPSWICH FESTIVAL 2026 -->
+  <div class="event reveal" data-event>
+    <div class="event-head" data-toggle>
+      <div class="event-cover">🎉</div>
+      <div class="event-info">
+        <div class="event-name">Ipswich Festival 2026</div>
+        <div class="event-meta">Ipswich, QLD</div>
+      </div>
+      <div class="event-count">Coming soon</div>
+      <div class="event-chevron">▾</div>
+    </div>
+    <div class="event-body">
+      <div class="event-body-inner">
+        <div class="event-empty">Photos from this event are on the way.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LATIN KIDS 2026 -->
+  <div class="event reveal" data-event>
+    <div class="event-head" data-toggle>
+      <div class="event-cover">🎉</div>
+      <div class="event-info">
+        <div class="event-name">Latin Kids 2026</div>
+        <div class="event-meta">Brisbane, QLD</div>
+      </div>
+      <div class="event-count">Coming soon</div>
+      <div class="event-chevron">▾</div>
+    </div>
+    <div class="event-body">
+      <div class="event-body-inner">
+        <div class="event-empty">Photos from this event are on the way.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LUMINOUS GOLD COAST 2026 -->
+  <div class="event reveal" data-event>
+    <div class="event-head" data-toggle>
+      <div class="event-cover">✨</div>
+      <div class="event-info">
+        <div class="event-name">Luminous Gold Coast 2026</div>
+        <div class="event-meta">Gold Coast, QLD</div>
+      </div>
+      <div class="event-count">Coming soon</div>
+      <div class="event-chevron">▾</div>
+    </div>
+    <div class="event-body">
+      <div class="event-body-inner">
+        <div class="event-empty">Videos are being edited — photos and clips coming soon.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LUMINOUS PARADE BRISBANE 2026 -->
+  <div class="event reveal" data-event>
+    <div class="event-head" data-toggle>
+      <div class="event-cover">✨</div>
+      <div class="event-info">
+        <div class="event-name">Luminous Parade Brisbane 2026</div>
+        <div class="event-meta">Southbank, Brisbane</div>
+      </div>
+      <div class="event-count">Coming soon</div>
+      <div class="event-chevron">▾</div>
+    </div>
+    <div class="event-body">
+      <div class="event-body-inner">
+        <div class="event-empty">Videos are being edited — photos and clips coming soon.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIMER EVENTO -->
+  <div class="event reveal" data-event>
+    <div class="event-head" data-toggle>
+      <div class="event-cover">🇪🇨</div>
+      <div class="event-info">
+        <div class="event-name">Primer Evento</div>
+        <div class="event-meta">Our very first event</div>
+      </div>
+      <div class="event-count">Coming soon</div>
+      <div class="event-chevron">▾</div>
+    </div>
+    <div class="event-body">
+      <div class="event-body-inner">
+        <div class="event-empty">Photos from this event are on the way.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="upload-cta reveal">
+    <p>📸 We are growing from our performances.<br>Follow us on social media to see our latest rehearsals and shows.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap">
+      <a href="index.html#contact" class="btn btn-rojo">💬 Contact Us</a>
+      <a href="index.html" class="btn btn-outline">← Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<div id="lightbox" onclick="closeLightbox(event)">
+  <button id="lightbox-close" onclick="closeLightbox(event)">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer>
+  © 2026 Ecuadorian Roots Dance Group · Brisbane 🇪🇨🇦🇺 ·
+  Developed by <a href="mailto:ecuadorianrootsbne@gmail.com">Carlos Fiallos</a>
+</footer>
+
+<script>
+document.querySelectorAll('[data-toggle]').forEach(head=>{
+  head.addEventListener('click',()=>{
+    const ev = head.closest('.event');
+    const wasOpen = ev.classList.contains('open');
+    document.querySelectorAll('.event.open').forEach(e=>e.classList.remove('open'));
+    if(!wasOpen) ev.classList.add('open');
+  });
+});
+document.querySelectorAll('.event-masonry img').forEach(img=>{
+  img.addEventListener('click',()=>{
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+});
+function closeLightbox(e){
+  if(!e || e.target.id==='lightbox' || e.target.id==='lightbox-close'){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// open first event by default
+document.querySelector('.event')?.classList.add('open');
+</script>
+</body>
+</html>
